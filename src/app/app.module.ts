@@ -13,16 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import en from '@angular/common/locales/en';
-import { CommonModule } from '@angular/common';
-
-import { NZ_ICONS } from 'ng-zorro-antd/icon';
-
-import { IconDefinition } from '@ant-design/icons-angular';
-import * as AllIcons from '@ant-design/icons-angular/icons';
-
-import { DemoNgZorroAntdModule } from './shared/ng-zorro-antd.module';
-
-import { NzDemoTimePickerHideColumnComponent } from './shared/time-select/time-select.component'
 
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 registerLocaleData(en);
@@ -32,7 +22,7 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     NewSourcesComponent,
-    NzDemoTimePickerHideColumnComponent
+   
 
   ],
   imports: [
@@ -42,7 +32,6 @@ registerLocaleData(en);
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    DemoNgZorroAntdModule,
      NzTimePickerModule ,
      DragDropModule
   ],
