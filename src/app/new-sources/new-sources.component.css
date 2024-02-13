@@ -1,0 +1,158 @@
+.content{
+    padding:90px 30px 0px 30px;
+}
+.backBtn{
+    width:57px;
+    height: 57px;
+    border-radius: 17px;
+   border: none;
+   background-color: #E7EAED;
+}
+.text{
+    font-size: 24px;
+    font-weight:700;
+    text-align: right;
+    margin-bottom: 0;
+}
+.toggleText{
+    font-size: 18px;
+    font-weight: 400;
+    color: #1C1C28;
+    margin-bottom: 0;
+}
+.btn-dark{
+    width:100% ;
+   min-height: 50px;
+    min-width: 100px;
+    
+}
+.del-btn{
+    /* margin-right: auto; */
+    width:100%;
+    min-width: 120px;
+    min-height: 50px;
+   border: 1px solid #FF4B55;
+   color:#FF4B55 ;
+   background-color: #FFF6F6;
+}
+.useContent{
+    background-color: #FAF9F9;
+    border-radius: 15px;
+}
+
+.circular-div {
+    position: relative;
+    width: 100px;
+    height: 124px;
+    
+    
+  }
+  
+  .circular-div img {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .fileInput{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 25px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: transparent;
+    /* border:1px solid #0771DE; */
+    
+    
+  }
+  input[type="file"]::before {
+    position: absolute;
+   cursor: pointer;
+    top: 0px;
+    left: 0px;
+    height: 26px;
+    width: 26px;
+    content: "";
+    background-image: url("../../assets/fileupload.png");
+  
+  }
+
+  .labelText{
+    font-size: 16px;
+    color: #92A1AD;
+    display: flex; 
+  align-items: center;
+  margin-bottom: 0;
+  }
+
+  .inputs{
+    border-color: #B2A6A6;
+    background-color: #F4EEEE;
+    color: #1C1C28;
+    font-size: 16px;
+    font-weight: 700;
+  }
+.radio{
+    width: 18px;
+    height: 18px;
+}
+.radio:checked{
+    border: 2px solid #0771DE ;
+}
+
+.selectPeriod{
+    position: absolute;
+    top: 49px;
+    left: 37px;
+    width: 117px;
+    height: 36px;
+    border: 1px solid #E7E7E8;
+    background-color: #ECF1F6;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400px;
+    border-radius: 5px 0 0 5px;
+    
+}
+input[type="file"]{
+    overflow: hidden;
+}
+
+.add-btn{
+    
+    position: absolute;
+    top: 7px;
+    right: 18px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    padding: 0;
+}
+.sub-btn{
+    position: absolute;
+    top: 7px;
+    left: 18px;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+}
+.show{
+    visibility:visible;
+}
+
+@media(max-width:660px){
+    .text{
+        font-size: 18px;
+    }
+    .backBtn{
+        width:40px;
+        height:40px;
+    }
+    .useContent{
+        margin-bottom: 10px;
+    }
+
+}

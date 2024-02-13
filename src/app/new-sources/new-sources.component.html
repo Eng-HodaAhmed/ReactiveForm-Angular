@@ -1,0 +1,266 @@
+<div class="content backGround">
+    <form #f="ngForm">
+        <div class="row align-items-center  mb-3">
+
+            <div class="col-2 col-md-1">
+                <button class=" btn backBtn">
+                    <img src="assets/arrow-right.png">
+                </button>
+
+            </div>
+
+            <div class="col-4 col-md-6 text-right ">
+                <p class="text ">اضافة موارد جديدة</p>
+            </div>
+
+
+            <div class="col-md-5 row me-auto align-items-center">
+                <div class="col-3 d-flex me-auto">
+                    <ng-toggle [value]="active" [color]="{
+                    unchecked: '#939da2',
+                    checked: '#0771DE',
+                    name:'مفعلة'
+                    }"></ng-toggle>
+                    <p class=" me-2 ms-2 toggleText">مفعلة</p>
+                </div>
+
+                <div class="col-4">
+                    <button class="btn btn-dark" (click)="onSave()" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"> حفظ
+                        التغيرات</button>
+                </div>
+
+                <div class="col-4">
+                    <button class="btn del-btn ">
+                        <img class="ms-2" src="../../assets/trash.png" alt=""> حذف المورد</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="row ">
+            <div class="col-md-6 ">
+                <div class="p-4 useContent mb-2">
+                    <div class="row align-items-center ">
+                        <div class="col-3">
+
+                            <div class="circular-div">
+                                <img [src]="imageUrl" alt="Profile Picture">
+                                <input type="file" class="fileInput" (change)="onFileSelected($event)" accept="image/*">
+                            </div>
+
+                        </div>
+                        <div class="col-9">
+                            <label for="name" class=" form-label labelText">اسم المورد</label>
+                            <input type="text" class="inputs form-control" name="name" [(ngModel)]="name">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 useContent">
+                    <div class="row align-items-center">
+                        <div class="col-3">
+                            <label for="name" class=" form-label labelText">اختر نوع المورد</label>
+                        </div>
+                        <div class="col-4">
+                            <label for="duringTimr" class="labelText ">
+                                <input type="radio" name="orderTime" class="radio ms-2 " value="حجز خلال اليوم"
+                                    [(ngModel)]="orderTime">حجز خلال اليوم
+                            </label>
+                        </div>
+
+                        <div class="col-4">
+                            <label for="duringTimr" class="labelText ">
+                                <input type="radio" name="orderTime" [(ngModel)]="orderTime" class="radio ms-2 "
+                                    value="حجز مدة(أكثر من يوم)">حجز مدة(أكثر من
+                                يوم)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 " style="position: relative;">
+                <div class="p-4 useContent" style="height: 252px;">
+                    <label for="name" class=" form-label labelText"> المورد متاح الى</label>
+                    <input type="number" class="inputs form-control mb-2" name="availableNum"
+                        [(ngModel)]="availableNum">
+
+                    <select name="availablePeriod" class="selectPeriod" [(ngModel)]="availablePeriod">
+                        <option value="أسبوع" selected>أسبوع</option>
+                        <option value="شهر">شهر</option>
+                        <option value="سنة">سنة</option>
+                    </select>
+
+                    <label for="name" class=" form-label labelText "> وقت المورد</label>
+                    <div class="row align-items-center mb-2">
+                        <div class="col-3">
+                            <label for="" class="labelText" style="color: #1C1C28;font-size: 14px;">
+                                <input type="radio" name="supplyTime" class="radio ms-2 " value="وقت الخدمة"
+                                    (change)="this.constantTimeFlag=false" [(ngModel)]="supplyTime"><img
+                                    src="../../assets/vector/box-time.png" class="ms-2"> وقت الخدمة
+                            </label>
+                        </div>
+                        <div class="col-4">
+                            <label for="" class="labelText " style="color: #1C1C28;font-size: 14px;">
+                                <input type="radio" name="supplyTime" class="radio ms-2 " value="الوقت الثابت"
+                                    (change)="this.constantTimeFlag=!this.constantTimeFlag"
+                                    [(ngModel)]="supplyTime"><img src="../../assets/vector/clock.png" class="ms-2">الوقت
+                                الثابت
+                            </label>
+                        </div>
+                        <div class="col-4 me-auto " style="position: relative;">
+                            <span *ngIf="constantTimeFlag==true"
+                                style="position: absolute;right: 105px; top:7px">دقيقة</span>
+                            <input *ngIf="constantTimeFlag==true" type="text" class="inputs form-control"
+                                name="constantTime" [(ngModel)]="constantTime" style="text-align: center;" readonly>
+                            <button *ngIf="constantTimeFlag==true" (click)="constantTime=constantTime+1"
+                                class="btn btn-primary add-btn">+</button>
+                            <button *ngIf="constantTimeFlag==true" (click)="constantTime=constantTime-1"
+                                class="btn btn-primary sub-btn">-</button>
+                        </div>
+                    </div>
+
+                    <label for="name" class=" form-label labelText"> الحجز المتعدد</label>
+                    <div class="row align-items-center">
+                        <div class="col-3">
+                            <label for="" class="labelText" style="color: #1C1C28;font-size: 14px;">
+                                <input type="radio" name="NumOfOrders" class="radio ms-2 " value="حجز مرة واحدة"
+                                    (change)="this.orderFlag=false" [(ngModel)]="NumOfOrders">
+                                <img src="../../assets/vector/Vector (1).png" style="opacity: 0.3;" class="ms-2">حجز
+                                واحد فقط
+                            </label>
+                        </div>
+                        <div class="col-5">
+                            <label for="" class="labelText" style="color: #1C1C28;font-size: 14px;">
+                                <input type="radio" name="NumOfOrders" class="radio ms-2 "
+                                    value="حجز أكثر من شخص لنفس الموعد" (change)="this.orderFlag=!this.orderFlag"
+                                    [(ngModel)]="NumOfOrders"><img src="../../assets/vector/Group 1000009043.png"
+                                    style="opacity: 0.3;" class="ms-2">حجز أكثر من شخص لنفس الموعد
+                            </label>
+                        </div>
+
+                        <div class="col-4 me-auto " style="position: relative;">
+                            <span *ngIf="orderFlag==true" style="position: absolute;right: 100px; top:7px">موعد</span>
+                            <input *ngIf="orderFlag==true" type="number" class="inputs form-control" name="bookerNumber"
+                                [(ngModel)]="bookerNumber" min="1" max="50" dir="ltr" style="padding-left: 80px;">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+
+
+    <div class="p-4 useContent mt-2">
+        <p style="font-size: 24px;">حدد مواعيد العمل للمورد</p>
+        <p class="labelText mb-4">تكوين إعدادات الأسبوع الخاص بك هنا. ما عليك سوى تحريك أشرطة التمرير وإضافة / إزالة
+            أوقات الراحة لإعداد ساعات العمل.</p>
+
+        <div class="row align-items-center mb-4" *ngFor="let time of workingTime; let i =index">
+
+            <div class="col-2 col-sm-1 ">
+                <ng-toggle [value]="time.isToggled" [color]="{
+                        unchecked: '#939da2',
+                        checked: '#0771DE',
+                        }" [(checked)]="time.isToggled" (change)="onToggleChange(i)"></ng-toggle>
+            </div>
+            <div class="col-2 col-sm-1 ms-auto">
+                <p class="toggleText">{{time.dayName}}</p>
+            </div>
+
+            <form [formGroup]="workingForm.get(time.dayName)" class="row align-items-center col-sm-10">
+
+                <div *ngIf="time.isToggled==true">
+                    <div class="row">
+                        <div class="col-sm-4" style="position: relative;">
+                            <p class="labelText">وقت البدء</p>
+                            <nz-time-picker class="form-control" formControlName="basicStartTime" nzFormat="HH:mm"></nz-time-picker>
+                        
+                        </div>
+                        <div class="col-sm-4" style="position: relative;">
+                            <p class="labelText">وقت الانتهاء</p>
+                            <nz-time-picker class="form-control" formControlName="basicEndTime" nzFormat="HH:mm"></nz-time-picker>
+                          
+                        </div>
+                        <div class="col-sm-1 mt-4">
+                            <button class="ps-2 pe-2" style="border-radius:50%;background-color: #e4e5e7; border: none;"
+                                (click)="addTime(i)">+</button>
+                        </div>
+                        <div class="col-sm-1 mt-4">
+                            <button class="p-2" style="border-radius: 5px;background-color: #d7e4f7; border: none;"><img
+                                    src="../../assets/add.png"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div formArrayName="startTimes" class="col-sm-4">
+                            <div *ngFor="let item of getControls(i,'startTimes'); let indexNum= index;"
+                                style="position: relative;" >
+                                <p class="labelText">وقت البدء</p>
+                                <nz-time-picker class="form-control" [formControlName]="indexNum" nzFormat="HH:mm"></nz-time-picker>
+                            </div>
+                        </div>
+
+                        <div formArrayName="endTimes" class="col-sm-4">
+                            <div *ngFor="let item of getControls(i,'endTimes'); let indexNum= index; " 
+                                style="position: relative;" >
+                                <p class="labelText">وقت الانتهاء</p>
+                                <nz-time-picker class="form-control" [formControlName]="indexNum" nzFormat="HH:mm"></nz-time-picker>
+                             
+                            </div>
+
+                        </div>
+                        <div class="col-sm-1 mt-4" *ngFor="let item of getControls(i,'endTimes');">
+                            <div></div>
+                            <button class="ps-2 pe-2"
+                                style="border-radius:50%;background-color: #e4e5e7; border: none; width:25px"
+                                (click)="delTime(indexNum)">-</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div> -->
+            <div class="modal-body">
+                <p>اسم المورد :{{name}}</p>
+
+                <p>نوع المورد {{orderTime}}</p>
+
+                <p>المورد متاح الى {{availableNum}} {{availablePeriod}}</p>
+                <p>وقت المورد {{supplyTime}}</p>
+                <p>وقت الخدمة : وقت المورد{{supplyTime}} </p>
+                <p>الوقت الثابت{{constantTime}}</p>
+                <p>الحجز المتعدد {{NumOfOrders}}</p>
+                <p>{{bookerNumber}}</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
