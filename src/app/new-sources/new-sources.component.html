@@ -177,54 +177,29 @@
             </div>
 
             <form [formGroup]="workingForm.get(time.dayName)" class="row align-items-center col-sm-10">
-
-                <div *ngIf="time.isToggled==true">
-                    <div class="row">
-                        <div class="col-sm-4" style="position: relative;">
-                            <p class="labelText">وقت البدء</p>
-                            <nz-time-picker class="form-control" formControlName="basicStartTime" nzFormat="HH:mm"></nz-time-picker>
-                        
-                        </div>
-                        <div class="col-sm-4" style="position: relative;">
-                            <p class="labelText">وقت الانتهاء</p>
-                            <nz-time-picker class="form-control" formControlName="basicEndTime" nzFormat="HH:mm"></nz-time-picker>
-                          
-                        </div>
-                        <div class="col-sm-1 mt-4">
-                            <button class="ps-2 pe-2" style="border-radius:50%;background-color: #e4e5e7; border: none;"
-                                (click)="addTime(i)">+</button>
-                        </div>
-                        <div class="col-sm-1 mt-4">
-                            <button class="p-2" style="border-radius: 5px;background-color: #d7e4f7; border: none;"><img
-                                    src="../../assets/add.png"></button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div formArrayName="startTimes" class="col-sm-4">
-                            <div *ngFor="let item of getControls(i,'startTimes'); let indexNum= index;"
-                                style="position: relative;" >
+                <div formArrayName="times">
+                    <div *ngFor="let item of getControls(i); let j =index" [formGroupName]="j">
+                        <div class="row">
+                            <div class="col-sm-4" style="position: relative;">
                                 <p class="labelText">وقت البدء</p>
-                                <nz-time-picker class="form-control" [formControlName]="indexNum" nzFormat="HH:mm"></nz-time-picker>
+                                <nz-time-picker class="form-control" formControlName="startTime" nzFormat="HH:mm"></nz-time-picker>
+                            
                             </div>
-                        </div>
-
-                        <div formArrayName="endTimes" class="col-sm-4">
-                            <div *ngFor="let item of getControls(i,'endTimes'); let indexNum= index; " 
-                                style="position: relative;" >
+                            <div class="col-sm-4" style="position: relative;">
                                 <p class="labelText">وقت الانتهاء</p>
-                                <nz-time-picker class="form-control" [formControlName]="indexNum" nzFormat="HH:mm"></nz-time-picker>
-                             
+                                <nz-time-picker class="form-control" formControlName="endTime" nzFormat="HH:mm"></nz-time-picker>
+                            
                             </div>
-
+                            <div class="col-sm-1 mt-4">
+                                <button class="ps-2 pe-2" style="border-radius:50%;background-color: #e4e5e7; border: none;"
+                                    (click)="addTime(j)">+</button>
+                            </div>
+                            <div class="col-sm-1 mt-4">
+                                <button class="p-2" style="border-radius: 5px;background-color: #d7e4f7; border: none;"><img
+                                        src="../../assets/add.png"></button>
+                            </div>
                         </div>
-                        <div class="col-sm-1 mt-4" *ngFor="let item of getControls(i,'endTimes');">
-                            <div></div>
-                            <button class="ps-2 pe-2"
-                                style="border-radius:50%;background-color: #e4e5e7; border: none; width:25px"
-                                (click)="delTime(indexNum)">-</button>
-                        </div>
-
-
+                       
                     </div>
                 </div>
             </form>

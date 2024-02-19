@@ -46,54 +46,32 @@ export class NewSourcesComponent implements OnInit {
   day: string;
 
   ngOnInit(): void {
-  
+
 
     this.workingForm = new FormGroup({
-      
+
       'السبت': new FormGroup({
-        'basicStartTime': new FormControl(new Date()),
-        'basicEndTime': new FormControl(new Date()),
-        'startTimes': new FormArray([]),
-        'endTimes': new FormArray([])
+        'times': new FormArray([])
       }),
       'الأحد': new FormGroup({
-        'basicStartTime': new FormControl(new Date()),
-        'basicEndTime': new FormControl(new Date()),
-        'startTimes': new FormArray([]),
-        'endTimes': new FormArray([])
+        'times': new FormArray([])
       }),
       'الإثنين': new FormGroup({
-        'basicStartTime': new FormControl(new Date()),
-        'basicEndTime': new FormControl(new Date()),
-        'startTimes': new FormArray([]),
-        'endTimes': new FormArray([])
+        'times': new FormArray([])
       }),
       'الثلاثاء': new FormGroup({
-        'basicStartTime': new FormControl(new Date()),
-        'basicEndTime': new FormControl(new Date()),
-        'startTimes': new FormArray([]),
-        'endTimes': new FormArray([])
+        'times': new FormArray([])
       }),
       'الأربعاء': new FormGroup({
-        'basicStartTime': new FormControl(new Date()),
-        'basicEndTime': new FormControl(new Date()),
-        'startTimes': new FormArray([]),
-        'endTimes': new FormArray([])
+        'times': new FormArray([])
       }),
       'الخميس': new FormGroup({
-        'basicStartTime': new FormControl(new Date()),
-        'basicEndTime': new FormControl(new Date()),
-        'startTimes': new FormArray([]),
-        'endTimes': new FormArray([])
+        'times': new FormArray([])
       }),
 
       'الجمعة': new FormGroup({
-        'basicStartTime': new FormControl(new Date()),
-        'basicEndTime': new FormControl(new Date()),
-        'startTimes': new FormArray([]),
-        'endTimes': new FormArray([])
+        'times': new FormArray([])
       }),
-
 
     })
   }
@@ -111,11 +89,13 @@ export class NewSourcesComponent implements OnInit {
     this.workingTime[i].isToggled = !this.workingTime[i].isToggled;
 
     if (this.workingTime[i].isToggled == false) {
-      const startTimeformArray = (this.workingForm.get(this.day) as FormGroup).get('startTimes') as FormArray;
-      startTimeformArray.clear();
+      this.dayName(i + 1);
+      const TimeformArray = (this.workingForm.get(this.day) as FormGroup).get('times') as FormArray;
+      TimeformArray.clear();
 
-      const endTimeformArray = (this.workingForm.get(this.day) as FormGroup).get('endTimes') as FormArray;
-      endTimeformArray.clear();
+    }
+    else {
+      this.addTime(i)
     }
   }
 
@@ -146,18 +126,13 @@ export class NewSourcesComponent implements OnInit {
     }
   }
   addTime(i: number) {
-
     this.dayName(i + 1);
-    
-    const startControl = new FormControl(null);
-    const endControl = new FormControl(null);
- 
-    const startTimeformArray = (this.workingForm.get(this.day) as FormGroup).get('startTimes') as FormArray;
-    startTimeformArray.push(startControl);
- 
-    const endTimeformArray = (this.workingForm.get(this.day) as FormGroup).get('endTimes') as FormArray;
-    endTimeformArray.push(endControl);
-
+    const times = new FormGroup({
+      'startTime': new FormControl(),
+      'endTime': new FormControl()
+    })
+    const day = (this.workingForm.get(this.day) as FormGroup).get('times') as FormArray
+    day.push(times);
 
   }
   delTime(i: number) {
@@ -169,24 +144,19 @@ export class NewSourcesComponent implements OnInit {
 
   }
 
-  getControls(i: number, arrayName: string) {
+  getControls(i: number) {
     this.dayName(i + 1);
 
-    const TimesArray = (this.workingForm.get(this.day) as FormGroup).get(arrayName) as FormArray;
+    const TimesArray = (this.workingForm.get(this.day) as FormGroup).get('times') as FormArray;
     return TimesArray.controls;
 
   }
 
   //display values of one day on consol
   onSave() {
-    const saturdayBasicStartTime = this.workingForm.get('السبت.basicStartTime').value;
-    const saturdayBasicEndTime = this.workingForm.get('السبت.basicEndTime').value;
+
+    console.log(this.workingForm)
 
 
-    const saturdayStartTimes = this.workingForm.get('السبت.startTimes').value;
-    const saturdayEndTimes = this.workingForm.get('السبت.endTimes').value;
-
-    console.log(saturdayBasicStartTime, saturdayBasicEndTime);
-    console.log(saturdayStartTimes, saturdayEndTimes);
   }
 }
